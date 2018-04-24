@@ -1,7 +1,7 @@
 <?php
 
-class RecipeModel extends MainModel{
-    
+class RecipeModel extends MainModel {
+
     /**
      * Construtor para essa classe
      *
@@ -25,7 +25,7 @@ class RecipeModel extends MainModel{
         // Configura os dados do usuário
         $this->userdata = $this->controller->userdata;
     }
-    
+
     public function get_recipes_list() {
 
         // Simplesmente seleciona os dados na base de dados 
@@ -38,7 +38,7 @@ class RecipeModel extends MainModel{
         // Preenche a tabela com os dados do usuário
         return $query->fetchAll();
     }
-    
+
     public function get_recipe_by_id($id) {
 
         // Simplesmente seleciona os dados na base de dados 
@@ -57,7 +57,7 @@ class RecipeModel extends MainModel{
         // Preenche a tabela com os dados do usuário
         return $query->fetchAll();
     }
-    
+
     public function adicionar() {
         // Configura os dados do formulário
         $this->form_data = array();
@@ -115,13 +115,14 @@ class RecipeModel extends MainModel{
         // Se o ID do usuário não estiver vazio, atualiza os dados
         if (!empty($id)) {
             $dt = new DateTime();
-            $query = $this->db->update('users', 'id', $id, array(
-                'firstname' => chk_array($this->form_data, 'firstname'),
-                'lastname' => chk_array($this->form_data, 'lastname'),
-                'email' => chk_array($this->form_data, 'email'),
-                'username' => chk_array($this->form_data, 'username'),
-                'password' => chk_array($this->form_data, 'password'),
-                'role_id' => 0,
+            $query = $this->db->update('recipes', 'id', $id, array(
+                'title' => chk_array($this->form_data, 'title'),
+                'description' => chk_array($this->form_data, 'description'),
+                'video' => chk_array($this->form_data, 'video'),
+                'user_id' => chk_array($this->form_data, 'user_id'),
+                'category_id' => chk_array($this->form_data, 'category_id'),
+                'yield' => chk_array($this->form_data, 'yield'),
+                'rate' => 0,
                 'createdAt' => $dt->format('Y-m-d H:i:s'),
                 'deleted' => false
             ));
@@ -133,7 +134,7 @@ class RecipeModel extends MainModel{
                 // Termina
                 return;
             } else {
-                $this->form_msg = '<p class="form_success">User successfully updated.</p>';
+                $this->form_msg = '<p class="form_success">Recipe successfully updated.</p>';
 
                 // Termina
                 return;
@@ -144,12 +145,11 @@ class RecipeModel extends MainModel{
 
             // Executa a consulta 
             $query = $this->db->insert('users', array(
-                'firstname' => chk_array($this->form_data, 'firstname'),
-                'lastname' => chk_array($this->form_data, 'lastname'),
-                'email' => chk_array($this->form_data, 'email'),
-                'username' => chk_array($this->form_data, 'username'),
-                'password' => chk_array($this->form_data, 'password'),
-                'role_id' => 0,
+                'title' => chk_array($this->form_data, 'title'),
+                'description' => chk_array($this->form_data, 'description'),
+                'video' => chk_array($this->form_data, 'video'),
+                'yield' => chk_array($this->form_data, 'yield'),
+                'rate' => 0,
                 'createdAt' => $dt->format('Y-m-d H:i:s'),
                 'deleted' => false
             ));
@@ -161,12 +161,12 @@ class RecipeModel extends MainModel{
                 // Termina
                 return;
             } else {
-                $this->form_msg = '<p class="form_success">User successfully registered.</p>';
+                $this->form_msg = '<p class="form_success">Recipe successfully registered.</p>';
 
                 // Termina
                 return;
             }
         }
     }
-}
 
+}

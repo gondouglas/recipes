@@ -1,8 +1,56 @@
-<?php
+<?php if (!defined('ABSPATH')) exit; ?>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<div class="wrap">
 
+    <?php
+// Carrega todos os métodos do modelo
+    $modelo->adicionar();
+    ?>
+
+    <form method="post" action="">
+        <table class="form-table">
+            <tr>
+                <td>Título: </td>
+                <td> <input type="text" name="title" value="<?php
+                    echo htmlentities(chk_array($modelo->form_data, 'title'));
+                    ?>" /></td>
+            </tr>
+            <tr>
+                <td>Descrição: </td>
+                <td> <input type="text" name="description" value="<?php
+                    echo htmlentities(chk_array($modelo->form_data, 'description'));
+                    ?>" /></td>
+            </tr>
+            <tr>
+                <td>Vídeo URL: </td>
+                <td> <input type="text" name="video" value="<?php
+                    echo htmlentities(chk_array($modelo->form_data, 'video'));
+                    ?>" /></td>
+            </tr>
+            <tr>
+                <td>Rendimento: </td>
+                <td> <input type="text" name="yield" value="<?php
+                    echo htmlentities(chk_array($modelo->form_data, 'yield'));
+                    ?>" /></td>
+            </tr>
+            <tr>
+                <td>Usuário Id: </td>
+                <td> <input type="text" name="user_id" value="<?php
+                    echo htmlentities(chk_array($modelo->form_data, 'user_id'));
+                    ?>" /></td>
+            </tr>
+            <tr>
+                <td>Categoria Id: </td>
+                <td> <input type="text" name="category_id" value="<?php
+                    echo htmlentities(chk_array($modelo->form_data, 'category_id'));
+                    ?>" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <?php echo $modelo->form_msg; ?>
+                    <input type="submit" value="Salvar" />
+                    <a href="<?php echo HOME_URI . '/recipe'; ?>">Nova receita</a>
+                </td>
+            </tr>
+        </table>
+    </form>
