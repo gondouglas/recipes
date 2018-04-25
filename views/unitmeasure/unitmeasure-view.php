@@ -1,61 +1,38 @@
-<?php if ( ! defined('ABSPATH')) exit; ?>
+<?php if (!defined('ABSPATH')) exit; ?>
 
-<div class="wrap">
+<div class="wrap main-page">
 
-<?php
-// Carrega todos os métodos do modelo
-$modelo->adicionar();
-//$modelo->get_register_form( chk_array( $parametros, 1 ) );
-//$modelo->del_user( $parametros );
-?>
-
-    <form method="post" action="">
-        <table class="form-table">
-            <tr>
-                <td>Unidade de medida: </td>
-                <td> <input type="text" name="unit" value="<?php
-                    echo htmlentities(chk_array($modelo->form_data, 'unit'));
-                    ?>" /></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <?php echo $modelo->form_msg; ?>
-                    <input type="submit" value="Salvar" />
-                    <a href="<?php echo HOME_URI . '/unitmeasure'; ?>">Nova unidade de medida</a>
-                </td>
-            </tr>
-        </table>
-    </form>
-
-<?php 
+    <?php
 // Lista os usuários
-$lista = $modelo->get_list();
-?>
+    $lista = $modelo->get_list();
+    ?>
 
+    <button><a href="<?php echo HOME_URI . '/unitmeasure/create'; ?>">Nova unidade</a></button>
+    <br/>
+    <br/>
+    <table  class="table-style-one">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Unidade de medida</th>
+            </tr>
+        </thead>
 
-<table class="list-table">
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Unidade de medida</th>
-		</tr>
-	</thead>
-			
-	<tbody>
-			
-		<?php foreach ($lista as $fetch_data): ?>
+        <tbody>
 
-			<tr>
-			
-				<td> <?php echo $fetch_data['id'] ?> </td>
-				<td> <?php echo $fetch_data['unit'] ?> </td>
+            <?php foreach ($lista as $fetch_data): ?>
 
-			</tr>
-			
-		<?php endforeach;?>
-			
-	</tbody>
-</table>
+                <tr>
+
+                    <td> <?php echo $fetch_data['id'] ?> </td>
+                    <td> <?php echo $fetch_data['unit'] ?> </td>
+
+                </tr>
+
+            <?php endforeach; ?>
+
+        </tbody>
+    </table>
 
 </div> <!-- .wrap -->
 

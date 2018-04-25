@@ -1,6 +1,7 @@
 <?php if (!defined('ABSPATH')) exit; ?>
 
-<div class="wrap">
+
+<div class="wrap main-page">
 
     <?php
 // Carrega todos os métodos do modelo
@@ -8,7 +9,7 @@
     ?>
 
     <form method="post" action="">
-        <table class="form-table">
+        <table class="table-style-one">
             <tr>
                 <td>Título: </td>
                 <td> <input type="text" name="title" value="<?php
@@ -35,13 +36,13 @@
             </tr>
             <tr>
                 <td>Usuário Id: </td>
-                <td> <input type="text" name="user_id" value="<?php
+                <td> <input type="number" name="user_id" value="<?php
                     echo htmlentities(chk_array($modelo->form_data, 'user_id'));
                     ?>" /></td>
             </tr>
             <tr>
                 <td>Categoria Id: </td>
-                <td> <input type="text" name="category_id" value="<?php
+                <td> <input type="number" name="category_id" value="<?php
                     echo htmlentities(chk_array($modelo->form_data, 'category_id'));
                     ?>" /></td>
             </tr>
@@ -49,7 +50,6 @@
                 <td colspan="2">
                     <?php echo $modelo->form_msg; ?>
                     <input type="submit" value="Salvar" />
-                    <a href="<?php echo HOME_URI . '/recipe'; ?>">Nova receita</a>
                 </td>
             </tr>
         </table>

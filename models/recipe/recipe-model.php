@@ -29,7 +29,30 @@ class RecipeModel extends MainModel {
     public function get_recipes_list() {
 
         // Simplesmente seleciona os dados na base de dados 
-        $query = $this->db->query('SELECT * FROM `recipes`');
+        $query = $this->db->query('select recipes.title, recipes.description, recipes.rate, recipes.yield, recipes.video, recipes.createdAt, users.username, categories.category from ((recipes inner join users on recipes.user_id = users.id) inner join categories on recipes.category_id = categories.id)');
+
+        // Verifica se a consulta está OK
+        if (!$query) {
+            return array();
+        }
+        // Preenche a tabela com os dados do usuário
+        return $query->fetchAll();
+    }
+
+    public function get_categories() {
+        // Simplesmente seleciona os dados na base de dados 
+        $query = $this->db->query('select * from categories');
+
+        // Verifica se a consulta está OK
+        if (!$query) {
+            return array();
+        }
+        // Preenche a tabela com os dados do usuário
+        return $query->fetchAll();
+    }
+
+    public function get_users() {
+        $query = $this->db->query('select * from users');
 
         // Verifica se a consulta está OK
         if (!$query) {
@@ -119,8 +142,8 @@ class RecipeModel extends MainModel {
                 'title' => chk_array($this->form_data, 'title'),
                 'description' => chk_array($this->form_data, 'description'),
                 'video' => chk_array($this->form_data, 'video'),
-                'user_id' => chk_array($this->form_data, 'user_id'),
-                'category_id' => chk_array($this->form_data, 'category_id'),
+                'user_id' => (int) chk_array($this->form_data, 'user_id'),
+                'category_id' => (int) chk_array($this->form_data, 'category_id'),
                 'yield' => chk_array($this->form_data, 'yield'),
                 'rate' => 0,
                 'createdAt' => $dt->format('Y-m-d H:i:s'),
@@ -144,10 +167,12 @@ class RecipeModel extends MainModel {
             $dt = new DateTime();
 
             // Executa a consulta 
-            $query = $this->db->insert('users', array(
+            $query = $this->db->insert('recipes', array(
                 'title' => chk_array($this->form_data, 'title'),
                 'description' => chk_array($this->form_data, 'description'),
                 'video' => chk_array($this->form_data, 'video'),
+                'user_id' => (int) chk_array($this->form_data, 'user_id'),
+                'category_id' => (int) chk_array($this->form_data, 'category_id'),
                 'yield' => chk_array($this->form_data, 'yield'),
                 'rate' => 0,
                 'createdAt' => $dt->format('Y-m-d H:i:s'),

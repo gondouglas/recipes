@@ -1,17 +1,21 @@
+<?php if (!defined('ABSPATH')) exit; ?>
 <?php
 // Lista os usuários
-    $lista = $modelo->get_recipes_list();
-    ?>
+$lista = $modelo->get_recipes_list();
+?>
 
-
-    <table class="list-table">
+<div class="wrap main-page">
+    <table  class="table-style-one">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Sobrenome</th>
-                <th>E-mail</th>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Rendimento</th>
+                <th>Avaliação</th>
+                <th>Data de criação</th>
+                <th>Vídeo</th>
                 <th>Usuário</th>
+                <th>Categoria</th>
             </tr>
         </thead>
 
@@ -21,12 +25,14 @@
 
                 <tr>
 
-                    <td> <?php echo $fetch_data['id'] ?> </td>
-                    <td> <?php echo $fetch_data['firstname'] ?> </td>
-                    <td> <?php echo $fetch_data['lastname'] ?> </td>
-                    <td> <?php echo $fetch_data['email'] ?> </td>
+                    <td> <?php echo $fetch_data['title'] ?> </td>
+                    <td> <?php echo $fetch_data['description'] ?> </td>
+                    <td> <?php echo $fetch_data['yield'] ?> </td>
+                    <td> <?php echo $fetch_data['rate'] ?> </td>
+                    <td> <?php echo $fetch_data['createdAt'] ?> </td>
+                    <td> <?php echo $fetch_data['video'] ?> </td>
                     <td> <?php echo $fetch_data['username'] ?> </td>
-
+                    <td> <?php echo $fetch_data['category'] ?> </td>
 
                 </tr>
 
@@ -34,3 +40,4 @@
 
         </tbody>
     </table>
+</div>
